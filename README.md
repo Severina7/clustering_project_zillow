@@ -2,11 +2,11 @@
 
 ## Project Specifications
 
-  - This project will contain a clearly named final notebook, with profuse markdown. This notebook will be what you present and should contain plenty of markdown documentation and cleaned up code.
-  - A README that explains what the project is, how to reproduce you work, and your notes from project planning.
+  - This project will contain a clearly named final notebook, with copious markdown.
+  - It will also contain a README that explains what the project is, how to reproduce my work, and my notes from project planning.
   - A Python module or modules that automate the data acquisistion and preparation process. These modules should be imported and used in your final notebook.
-## Business Goals
-  - Construct an ML Regression model that predict propery tax assessed values ('taxvaluedollarcnt') of Single Family Properties using attributes of the properties.
+## Goals of the project
+  - Use clusters to help your exploration, understanding, and modeling of the data
   - Find the key drivers of property value for single family properties.
   - Deliver a report that the data science team can read through and replicate, understand what steps were taken, why and what the outcome was.
   - Make recommendations on what works or doesn't work in prediction these homes' values.
@@ -16,7 +16,7 @@
 ### A github repo containing the following:
   - A Readme (.md) file
   
-  - A Final Report (.ipynb)
+  - <ins>A Final Report (.ipynb)</ins>
     
   - Acquire & Prepare Modules (.py)
 
