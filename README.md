@@ -1,14 +1,10 @@
 # The Clustering Project using Zillow data
 
-## Project objectives
+## Project Specifications
 
-  - Document code, process (data acquistion, preparation, exploratory data analysis and statistical testing, modeling, and model evaluation),
-  findings, and key takeaways in a Jupyter Notebook report.
-  - Create modules (acquire.py, prepare.py) that make my process repeateableand your report (notebook) easier to read and follow..
-  - Ask exploratory questions of my data that will help me understand more about the attributes and drivers of home value. Answer the questions by using charts and statistical tests.
-  - Construct a model to predict assessed home value for single family properties using regression techniques.
-  - Deliver a 5 minute target-audience-appropriate presentation consisting of a high-level notebook walkthrough using my Jupyter Notebook from above.
-  - Answer questions of my audience.
+  - This project will contain a clearly named final notebook, with profuse markdown. This notebook will be what you present and should contain plenty of markdown documentation and cleaned up code.
+  - A README that explains what the project is, how to reproduce you work, and your notes from project planning.
+  - A Python module or modules that automate the data acquisistion and preparation process. These modules should be imported and used in your final notebook.
 ## Business Goals
   - Construct an ML Regression model that predict propery tax assessed values ('taxvaluedollarcnt') of Single Family Properties using attributes of the properties.
   - Find the key drivers of property value for single family properties.
