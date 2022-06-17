@@ -6,13 +6,13 @@
 
 >It is often a preprocessing or an exploratory step in the data science pipeline
 
-> In this case, I am using clusters to help my exploration, understanding, and modeling of the data.
+> In this project, I am using clusters to help my exploration, understanding, and modeling of the data.
 
 # Specification
 
 ## *Goals*
 
-Use clusters to help your exploration, understanding, and modeling of the Zillow data using the logerror column as a 'target'
+Use clusters to help my exploration, understanding, and modeling of the Zillow data using the <ins>logerror</ins> column as a 'target' and determining the best suitable clusters that impact <ins>logerror</ins>
 
 ## *Audience*
 > A data science team. The presentation will consist of a notebook demo of the discoveries I made and work I have done related to uncovering what the drivers of the error in the zestimate is.
@@ -44,32 +44,47 @@ Use clusters to help your exploration, understanding, and modeling of the Zillow
 | lot_cluster    | 59930 non-null int64   | Derived column which indicates if each home is in the cluster containing lot_size, age and full value                     |
 | loc_cluster    | 59930 non-null int64   | Derived column which indicates if each home is in the cluster containing latitude, longitude, lot size and square footage |
 
-## *The Pipeline*
+## *Pipeline stages breakdown*
 
-### PROJECT PLANNING & README
+### PLANNING with README
 
-> Brainstorming ideas, hypotheses, related to how variables might impact or relate to each other, both within independent variables and between the independent variables and dependent variable, and also related to any ideas for new features you may have while first looking at the existing variables and challenge ahead of you.
+> I decided to write the README first as it will give me a bird's eye view of the project and lead seamslessly my progression. 
 
-> In addition: we will summarize our project and goals. We will task out how we will work through the pipeline, in as much detail as we need to keep on track.
+> I wrote down the background, the goal, and delivreables of the project. 
+
+> I also thought about the process of importing the data as a first step to understanding what I am dealing with and start asking questions about the preparation and later on, the exploration phase.
+
+>It helps me brainstorm hypothesis and ask the right question on how variables might impact or relate to each other, both within independent variables and between the independent variables and dependent variable, do I need to create new features with the one I have gotten in the dataframe? Writing the README and going through these processes is all done concomitantly but the first two points were done first.
+
 
 ### ACQUIRE:
 
-**Goal**: leave this section with a dataframe ready to prepare.
+**Objective**
 
-The ad hoc part includes summarizing your data as you read it in and begin to explore, look at the first few rows, data types, summary stats, column names, shape of the data frame, etc.
+>Get the right tables through a SQL query as a dataframe and write it to a csv file locally in order to avoid long queries. Since the data does not change this is safe and the result will be as if I were using the Codeup database.
 
-acquire.py: The reproducible part is the gathering data from SQL.
+>This includes displaying and summariziing statiscally parts or the entirety of the data.
+
+>Write my findings in a Takeaways markdown
+
+>The result is a acquire.py file containing functions to acquire, display and summarize the data.
 
 ### PREP:
 
-**Goal**: leave this section with a dataset that is ready to be analyzed. Data types are appropriate, missing values have been addressed, as have any data integrity issues.
+**Objective**
 
-The ad hoc part includes plotting the distributions of individual variables and using those plots to identify outliers and if those should be handled (and if so, how), identify unit scales to identify how to best scale the numeric data, as well as finding erroneous or invalid data that may exist in your dataframe.
+>Transforme the dataframe to get it in a state that is suitable for analysis. Data types are appropriate, missing values have been addressed, as have any data integrity issues.
 
-Some items to consider:
+>This includes:
+  - Getting rid of nulls and unnecessary column
+  - Plotting the distributions of individual variables and using those plots to identify outliers
+  - Decide whether or not and if yes, how to handled outliers
+  - Determine which variable needs scaling and what scler to use depending on the shape of its distribution plot
 
-- [X] split data to train/test<br>
-- [X] Handle Missing Values
+>Process:
+
+- [X] Handle Missing Values<br>
+- [X] split data to train/test
 - [X] Handle erroneous data and/or outliers you wish to address
 - [X] encode variables as needed
 - [X] scale data as needed
@@ -77,13 +92,28 @@ Some items to consider:
 - [X] cluster independent variables
 - [X] test the significance of and visualize clusters
 
-prep.py: The reproducible part is the handling of missing values, fixing data integrity issues, changing data types, etc.
+>Write my findings in a Takeaways markdown
+
+>This process results in a prepare.py file
 
 ### DATA EXPLORATION & FEATURE SELECTION
 
-**Goal**: Address each of the questions posed in our planning and brainstorming phase - as time permits. As well as any uncovered that come up during the visual or statistical analysis.
+**Objectives**
 
-When you have completed this step, we will have the findings from our analysis that will be used in the final notebook, and information to move forward toward building a model.
+>I asked myself the following questions in order to find some insights:
+  - What is the distribution of each of the variables? This is important as we move forward into testing and modeling.
+
+  - Does the spending score differ across gender?
+
+  - Is there a relationship between spending score and annual income? (Linear or otherwise).
+
+  - Is there a relationship between age and spending score? (Linear or otherwise).
+
+  - If we control for age (by decade), does spending score differ across annual income?
+
+  - If we control for annual income, does spending score differ across age decades?
+
+>Write my findings in a Takeaways markdown
 
 ### MODELING & EVALUATION
 
