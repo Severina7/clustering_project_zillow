@@ -1,123 +1,164 @@
 # The Clustering Project using Zillow data
 
-## Project Specifications
+## *General background about the project*:
 
-  - This project will contain a clearly named final notebook, with copious markdown.
-  - It will also contain a README that explains what the project is, how to reproduce my work, and my notes from project planning.
-  - A Python module or modules that automate the data acquisistion and preparation process. These modules should be imported and used in your final notebook.
-## Goals of the project
-  - Use clusters to help your exploration, understanding, and modeling of the data
-  - Find the key drivers of property value for single family properties.
-  - Deliver a report that the data science team can read through and replicate, understand what steps were taken, why and what the outcome was.
-  - Make recommendations on what works or doesn't work in prediction these homes' values.
-## Audience
-  - My (virtual) customer/end user is the Zillow data science team.
-## Project Deliverables
-### A github repo containing the following:
-  - A Readme (.md) file
-  
-  - <ins>A Final Report (.ipynb)</ins>
+> Clustering is an unsupervised machine learning methodology. It is used to group and identify similar observations when we do not have labels that identify the groups.
+
+>It is often a preprocessing or an exploratory step in the data science pipeline
+
+> In this project, I am using clusters to help my exploration, understanding, and modeling of the data.
+
+# Specification
+
+## *Goals*
+
+Use clusters to help my exploration, understanding, and modeling of the Zillow data using the <ins>logerror</ins> column as a 'target' and determining the best suitable clusters that impact <ins>logerror</ins>
+
+## *Audience*
+> A data science team. The presentation will consist of a notebook demo of the discoveries I made and work I have done related to uncovering what the drivers of the error in the zestimate is.
+
+## *Deliverables*
+
+**A github repository with the following content**
+
+1. A report (in the form of a detailed, high level notebook)
+
+2. A README explaining what the project is, how to reproduce my work, and my notes from project planning
+
+3. Python modules that automate the data acquisistion and preparation process and any other automated process.
+
+# Data Dictionary
+
+| Feature        | Count                  | Description                                                                                                               |
+|----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| latitude       | 77579 non-null float64 | Geographic coordinate that specifies the north–south position of each home on a map                         |
+| longitude      | 77579 non-null float64 | Geographic coordinate that specifies the east–west position of each home on a map                           |
+| age            | 77579 non-null int64   | Synthetic column indicating age of the houses at the time it was sold      |
+| square_footage | 77579 non-null float64 | Total square foot of houses           |
+| lot_size       | 77579 non-null float64 | Total square foot of entire lot                                                                          |
+| full_value     | 77579 non-null float64 | Total actual price of home                                                                                                |
+| Los_Angeles    | 77579 non-null int64   | Indicates if the home is in Los Angeles county                                                                            |
+| Orange         | 77579 non-null int64   | Indicates if the home is in Orange county                                                                                 |
+| Ventura        | 77579 non-null int64   | Indicates if the home is in Ventura county                                                                                |
+| logerror       | 77579 non-null float64 | Log of the error between actual home price and estimated home price                                                       |
+| lot_cluster    | 77579 non-null int64   | Derived column which indicates if each home is in the cluster containing lot_size, age and full value                     |
+| loc_cluster    | 77579 non-null int64   | Derived column which indicates if each home is in the cluster containing latitude, longitude, lot size and square footage |
+
+## *Pipeline stages breakdown*
+
+### PLANNING with README
+
+> I decided to write the README first as it will give me a bird's eye view of the project and lead seamslessly my progression. 
+
+> I wrote down the background, the goal, and delivreables of the project. 
+
+> I also thought about the process of importing the data as a first step to understanding what I am dealing with and start asking questions about the preparation and later on, the exploration phase.
+
+>It helps me brainstorm hypothesis and ask the right question on how variables might impact or relate to each other, both within independent variables and between the independent variables and dependent variable, do I need to create new features with the one I have gotten in the dataframe? Writing the README and going through these processes is all done concomitantly but the first two points were done first.
+
+
+### ACQUIRE:
+
+**Objective**
+
+>Get the right tables through a SQL query as a dataframe and 
+write it to a csv file locally in order to avoid long queries. 
+Since the data does not change this is safe and the result will be as if I were using the Codeup database.
+
+>This includes displaying and summariziing statiscally parts or the entirety of the data.
+
+>Write my findings in a Takeaways markdown
+
+>I will make a wrangle.py file
+
+### PREP:
+
+**Objective**
+
+>What I'll do
+  - Getting rid of nulls and unnecessary column
+  - Renaming difficult to read columns
+  - Decide whether or not and if yes, how to handled outliers
+  - Determine which variable needs scaling and what scaler to use depending on the shape of its distribution plot
+
+>Process:
+
+- [X] Getting rid of nulls and unnecessary column<br>
+- [X] Renaming difficult to read columns
+- [X] Handle erronous vallues by either imputing and/or dropping them
+- [X] Perform a univariate exam of the data
+- [X] Split and scale data
+
+>Write my findings in a Takeaways markdown
+
+>I will make a prep.py file
+
+### DATA EXPLORATION & FEATURE SELECTION
+
+**Objectives**
+
+I asked myself the following questions in order to find some insights:
+
+  >Is there a pattern in the data? Where?</font>
+
+  >What features are driving the logerror? What are the most prominent ones?</font>
+
+  >Is the impact of those features meaningful?</font>
+
+  >Write my findings in a Takeaways markdown
+
+>Process:
+- [X] cluster the target variable
+- [X] cluster independent variables
+- [X] test the significance of variables and clusters and visualize clusters
+
+### MODELING & EVALUATION
+
+**Goal**: Use a regression models with clusters to identify the one that performs better than a baseline.
+
+>Train (fit, transform, evaluate) multiple different models, varying the model type and your meta-parameters.
+
+>Compare evaluation metrics across all the models, and select the best performing model.
+
+>Test the final model (transform, evaluate) on your out-of-sample data (the testing data set). 
+
+>Summarize the performance and interpret my results.
+
+>I will make a prep.py file
+
+# SUMMARY
+
+## *SQL Data Acquisition*
+
+Must use your own env file for access to the database (including username and password).
+
+***
+
+## *Technical Skills used*
+
+* Python
+* MySQL Workbench
+* Jupyter Notebook
+* VS Code
+* Various data science libraries (Pandas, Numpy, Matplotlib, Seaborn, Sklearn, etc.)
+* Stats (Hypothesis testing, correlation tests)
+* Clustering Model (KMeans)
+* Regression Models (Linear Regression and others if time permits)
+
+***
+
+## *Executive Summary*
+
+1. The original variables are not useful in detecting changes in logerror
+
+2. Our main drivers appeared to hover around the overarching geological data and clustering using the selected features associated with those data points. 
+
+3. The linear regression model performed quite poorly. However, the decision tree and random forest regressors did slightly better than baseline.
+
+4. I observed some statistical difference between log error with regards to these features:
+    - Longitude/Latitude
+    - Lot size
+    - Square footage
+    - Age of the home
     
-  - Acquire & Prepare Modules (.py)
-
-  - My project will also have 1+ non-final Notebooks (.ipynb) created while working on the project
-### A final presentation
-
-## Project Context
-  - Dataset used came from Codeup database
-  - The project is the second modeling project and is using regression models and the data processing that goes along with it.
-
-## Data Dictionary
-- Target data: taxvaluedollarcnt renamed tax_value
-    * Content 52441 non-null values
-    * Data type: float64
-    * Definition: It is also called the Assessed value and is the dollar value assigned to a home or other piece of real estate for property tax purposes.
-- Features:
-    bedroomcnt renamed bedrooms, bathroomcnt renamed bathrooms, calculatedfinishedsquarefeet renamed indoor_sqft
-    * bedrooms:
-        - Content: 52442 non-null values
-        - Data type: float64
-        - Definition: This designates the number of bedrooms in each property
-    * bathrooms:
-        - Content: 52442 non-null values
-        - Data type: float64
-        - Definition: This designates the number of bathrooms in each property
-    * indoor_sqft:
-        - Content: 52360 non-null values
-        - Data type: float64
-        - Definition: this is the calculated total finished living area of the home
-Size of the file: 2.8+ MB (safe for export to github)
-
-## Initial Hypotheses
-### First Hypothesis
-    - Null hypothesis: $H_{0}$: there is no correlation between the number of bedrooms and the tax value of the properties
-    - Alternative hypothesis: $H_{A}$: there is a correlation between the number of bedrooms and the tax value of the properties.
-
-### Second Hypothesis
-    - Null hypothesis: $H_{0}$: there is no correlation between the number of bathrooms and the tax value of the properties
-    - Alternative hypothesis: $H_{A}$: there is a correlation between the number of bathrooms and the tax value of the properties.
-
-### Third Hypothesis
-    - Null hypothesis: $H_{0}$: there is no correlation between the indoor square footage and the tax value of the properties
-    - Alternative hypothesis: $H_{A}$: there is a correlation between the indoor square footage and the tax value of the properties.
-
-## Executive Summary - Conclusions & Next Steps
-    - The goal of this project was to build a model that could predict propery tax assessed values ('taxvaluedollarcnt') of Single Family Properties using attributes of the properties.
-    - Only Regression models were used ()
-    - Findings:
-        * The best model with the features used is the Decision Tree model.
-        * Its accuray is 76%  compared to the baseline at 73%
-        * Some features prevent churn and are worth examining
-
-## Pipeline stages breakdown
-  ### General Plan
-
-    - Create README.md with data dictionary, project and business goals, come up with initial hypotheses.
-    - Acquire data from the Codeup Database and create a function to automate this process.
-    - Clean and prepare data for the first iteration through the pipeline, MVP preparation. Create a function to automate the process, add it to the Aquire function together to form a wrangle.py file.
-    - Prepare data in Final Report Notebook by importing and using the funtion.
-    - Clearly define three hypotheses, produce charts to observe the data, run the statistical tests needed, reject or fail to reject the Null Hypothesis, and document findings and takeaways.
-    - Establish a baseline RMSE and document well.
-    - Train three different regression models.
-    - Evaluate models on train and validate datasets.
-    - Choose the model with that performs the best and evaluate that single model on the test dataset.
-    - Document conclusions, takeaways, and next steps in the Final Report Notebook.
-
-  ### General Plan -> Acquire
-    I have created a function <font color = 'brown'>get_connection</font> that uses login info from env.py file to access Codeup database.
-    It returns a string that can be used in another function <font color = 'brown'>wrangle_zillow</font> to return a dataframe from the SQL database
-  
-  ### General Plan -> Acquire -> Prepare
-    * Main question: What can prevent me from having data without nulls, that is relevant to my modeling, that is compatible with my models?
-    - Check for null values and drop them if they are not in great numbers (for example more than 15% of the data. This will also depend on the size of the data)
-    - Check for hard to read columns names to rename them appropriately
-    - Check for irrelevant columns (that won't impact the analysis and the modeling) and drop them
-    - Check for incompatible data types (example: data should be int64 but is object or float)
-    - Do a univariate exploration through charts and columns observation
-
-  ### General Plan -> Acquire -> Prepare -> Explore
-    **I will scale the data but assign the scaled data to a different variable tahn train and explore my train data with the train dataframe**
-    - I will use Standard, Robust, and Quantile scalers
-    - I will perform an exploration of the data to determine which columns are potential drivers of the tax value
-    - For the exploration I will use appropriate charts and statistical tests to show that there is or there is not a correlation between the independent variables (bedrooms, bathrooms, and square footage) and tax value.   
-
-  ### General Plan -> Acquire -> Prepare -> Explore -> Model
-    - Examine the shape of the tax value column to determine what model would work best
-    - Determine a baseline that will be used to compare the the models I will be creating
-    - Create an OLS, a LassoLars with alpha=3, and a Tweedie Regressor with power=1 & 3 and alpha=3
-    - Run the models on validate as well
-    - Compute an RMSE for each model and its validate and compare them all
-    - Choose the best model and run it on the test dataset
-
-  ### General Plan -> Acquire -> Prepare -> Explore -> Model -> Deliver
-    - Introduce myself and my project goals at the beginning of my notebook walkthrough.
-    - Summarize my findings at the beginning like I would for an Executive Summary. (Don't throw everything out that I learned from Storytelling) .
-    - Walk my audience through the analysis I did to answer my questions and that lead to my findings. (Visualize relationships and Document takeaways.)
-    - Clearly call out the questions and answers I am analyzing as well as offer insights and recommendations based on my findings.
-
-  ## To Reproduce my project
-    You will need your own env file with database credentials along with all the necessary files listed below to run my final project notebook.
-    - Read this README.md
-    - Download he wrangle.py file
-    - Add your own env file to your directory. (user, password, host)
-    - Run the final_report.ipynb notebook
+It appears either more time is necessary to evaluate the different clustering opportunities within the data. Or that, perhaps, clustering is not the best approach for this data.
