@@ -31,18 +31,23 @@ Use clusters to help my exploration, understanding, and modeling of the Zillow d
 
 | Feature        | Count                  | Description                                                                                                               |
 |----------------|------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| latitude       | 77579 non-null float64 | Geographic coordinate that specifies the north–south position of each home on a map                         |
-| longitude      | 77579 non-null float64 | Geographic coordinate that specifies the east–west position of each home on a map                           |
-| age            | 77579 non-null int64   | Synthetic column indicating age of the houses at the time it was sold      |
-| square_footage | 77579 non-null float64 | Total square foot of houses           |
-| lot_size       | 77579 non-null float64 | Total square foot of entire lot                                                                          |
-| full_value     | 77579 non-null float64 | Total actual price of home                                                                                                |
-| Los_Angeles    | 77579 non-null int64   | Indicates if the home is in Los Angeles county                                                                            |
-| Orange         | 77579 non-null int64   | Indicates if the home is in Orange county                                                                                 |
-| Ventura        | 77579 non-null int64   | Indicates if the home is in Ventura county                                                                                |
-| logerror       | 77579 non-null float64 | Log of the error between actual home price and estimated home price                                                       |
-| lot_cluster    | 77579 non-null int64   | Derived column which indicates if each home is in the cluster containing lot_size, age and full value                     |
-| loc_cluster    | 77579 non-null int64   | Derived column which indicates if each home is in the cluster containing latitude, longitude, lot size and square footage |
+| latitude       | 38664 non-null float64 | Geographic coordinate that specifies the north–south position of each home on a map  |
+| longitude      | 38664 non-null float64 | Geographic coordinate that specifies the east–west position of each home on a map    |
+| age            | 38664 non-null int64   | Synthetic column indicating age of the houses at the time it was sold                |
+| square_footage | 38664 non-null float64 | Total square foot of houses                                                          |
+| lot_size       | 38664 non-null float64 | Area of the lot in square feet                                                       |
+| full_value     | 38664 non-null float64 | Total actual price of house                                                          |
+| Los_Angeles    | 38664 non-null uint8   | Indicates if the house is in Los Angeles county                                                                            |
+| Orange         | 38664 non-null uint8   | Indicates if the house is in Orange county                                                                                 |
+| Ventura        | 38664 non-null uint8   | Indicates if the house is in Ventura county                                           |
+| logerror       | 38664 non-null float64 | Log of the error between actual house price and estimated home price                  |
+| habitable_sqft | 38664 non-null float64   | The square footage of the habitable parts of the house (garage not included i.e.)     |
+| building_tax_value| 38664 non-null float64| The assessed value of the land area of the parcel                                |
+| parcel_tax_value| 38664 non-null float64 | The square footage of the house including the lot and the building                     |
+| land_tax_value  | 38664 non-null float64 | The assessed value of the land area of the parcel                                      |
+| age             | 38664 non-null float64 | The age of the houses from the year they were built                                  |
+| tax_rate        | 38664 non-null float64 | The quotient of tax amount () and the total tax assessed value of the parcel (parcel_tax_value) |
+| value_per_sqft  | 38664 non-null float64 | The quotient of the total tax assessed value of the parcel (parcel_tax_value) and the area of the lot in square feet (lot_sqft)  |
 
 ## *Pipeline stages breakdown*
 
@@ -116,21 +121,21 @@ I asked myself the following questions in order to find some insights:
 
 **Goal**: Use a regression models with clusters to identify the one that performs better than a baseline.
 
->Train (fit, transform, evaluate) multiple different models, varying the model type and your meta-parameters.
+>Train (fit, transform, evaluate) multiple different models.
 
 >Compare evaluation metrics across all the models, and select the best performing model.
 
->Test the final model (transform, evaluate) on your out-of-sample data (the testing data set). 
+>Test the final model (transform, evaluate) on your out-of-sample/test data. 
 
 >Summarize the performance and interpret my results.
 
->I will make a prep.py file
+>I will make a cluster_model.py file
 
 # SUMMARY
 
 ## *SQL Data Acquisition*
 
-Must use your own env file for access to the database (including username and password).
+An env file is necessary for access to the database (including username and password).
 
 ***
 
@@ -149,16 +154,15 @@ Must use your own env file for access to the database (including username and pa
 
 ## *Executive Summary*
 
-1. The original variables are not useful in detecting changes in logerror
+>The original variables are not useful in detecting changes in logerror
 
-2. Our main drivers appeared to hover around the overarching geological data and clustering using the selected features associated with those data points. 
+>The value cluster seemd to be promissing with the lowest set of SSEs but that is not enough to make some conclusions since I was not able to run a model. 
 
-3. The linear regression model performed quite poorly. However, the decision tree and random forest regressors did slightly better than baseline.
+>I planned on using a OLS, LASSOLARS, and a Tweedie Regressor
 
-4. I observed some statistical difference between log error with regards to these features:
-    - Longitude/Latitude
-    - Lot size
-    - Square footage
-    - Age of the home
+>Physical position: latitude, longitude, Los_Angeles, Orange, Ventura,
+
+>Value: building_tax_value, parcel_tax_value, land_tax_value, tax_rate, value_per_sqft
+
+>Home features: bathrooms, bedrooms, lot_sqft
     
-It appears either more time is necessary to evaluate the different clustering opportunities within the data. Or that, perhaps, clustering is not the best approach for this data.

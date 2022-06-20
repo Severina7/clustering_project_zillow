@@ -11,7 +11,7 @@ import sklearn.model_selection
 from sklearn.impute import KNNImputer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.cluster import KMeans, dbscan
+from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.linear_model import LinearRegression

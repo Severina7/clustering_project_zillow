@@ -86,40 +86,6 @@ def get_local_zillow():
     return df
 
 
-def handle_nulls(df):
-    '''
-    Transforms data brought in from SQL to handle nulls 
-    Add calculated fields
-    '''
-    # Set nulls to be the median
-
-    median = df.calculatedfinishedsquarefeet.median()
-    df.calculatedfinishedsquarefeet = df.calculatedfinishedsquarefeet.fillna(median)
-
-    median = df.lotsizesquarefeet.median()
-    df.lotsizesquarefeet = df.lotsizesquarefeet.fillna(median)
-
-    median = df.taxvaluedollarcnt.median()
-    df.taxvaluedollarcnt = df.taxvaluedollarcnt.fillna(median)
-
-    median = df.taxamount.median()
-    df.taxamount = df.taxamount.fillna(median)
-
-    median = df.structuretaxvaluedollarcnt.median()
-    df.structuretaxvaluedollarcnt = df.structuretaxvaluedollarcnt.fillna(median)
-
-    # Use the mode for nulls
-
-    mode = df.yearbuilt.mode()
-    df.yearbuilt = df.yearbuilt.fillna(mode)
-
-    mode = df.landtaxvaluedollarcnt.mode()
-    df.landtaxvaluedollarcnt = df.landtaxvaluedollarcnt.fillna(mode)
-
-    # drop all remaining rows with null values
-    df = df.dropna()
-    return df
-
 
 def prepare_zillow(df):
     '''
