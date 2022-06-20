@@ -15,6 +15,14 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.cluster import KMeans, dbscan
 
 
+# Creating a string that connects me to MySQLWorkbench
+def get_connection(db, user=user, host=host, password=password):
+    '''
+    get_connection uses login info from env.py file to access Codeup db.
+    It takes in a string name of a database as an argument.
+    '''
+    return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+
 def get_zillow_data():
     '''
     zillow_data() gets the zillow (only properties_2017 table) data from Codeup db, then writes it to a csv file,
